@@ -1,15 +1,13 @@
 package com.example.springbootrabbitmq.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.example.springbootrabbitmq.utils.MessageUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 public class SendTopicMessageController {
@@ -19,21 +17,17 @@ public class SendTopicMessageController {
 
     @GetMapping("/sendTopicMessage1")
     public String sendTopicMessage1() {
-        Map<String, Object> manMap = new HashMap<>();
-        manMap.put("messageId", String.valueOf(UUID.randomUUID()));
-        manMap.put("messageData", "message: M A N ");
-        manMap.put("createTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        rabbitTemplate.convertAndSend("topicExchange", "topic.man", manMap);
+        Map msgMap = MessageUtil.getMsg("测试Topic交换机，消息路由键为topic.1");
+        String msg = JSON.toJSONString(msgMap);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.1", msg);
         return "ok";
     }
 
     @GetMapping("/sendTopicMessage2")
     public String sendTopicMessage2() {
-        Map<String, Object> womanMap = new HashMap<>();
-        womanMap.put("messageId", String.valueOf(UUID.randomUUID()));
-        womanMap.put("messageData", "message: woman is all ");
-        womanMap.put("createTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", womanMap);
+        Map msgMap = MessageUtil.getMsg("测试Topic交换机，消息路由键为topic.2");
+        String msg = JSON.toJSONString(msgMap);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.2", msg);
         return "ok";
     }
 }

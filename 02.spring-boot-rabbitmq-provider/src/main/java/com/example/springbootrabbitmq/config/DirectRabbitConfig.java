@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 直连型交换机配置，其他类型交换机类似
+ * 发送消息的时候，发现交换机不存在，才创建，如果交换机不存在且没发送消息，consumer启动不成功
  */
 @Configuration
 public class DirectRabbitConfig {
@@ -23,7 +24,7 @@ public class DirectRabbitConfig {
         //   return new Queue("TestDirectQueue",true,true,false);
 
         //一般设置一下队列的持久化就好,其余两个就是默认false
-        return new Queue("TestDirectQueue", true);
+        return new Queue("MQ_DIRECTTEST_PROVIDER2CONSUMER", true);
     }
 
     // Direct交换机 起名：TestDirectExchange

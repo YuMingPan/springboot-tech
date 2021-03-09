@@ -7,6 +7,10 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * topic型交换机配置，其他类型交换机类似
+ * 发送消息的时候，发现交换机不存在，才创建，如果交换机不存在且没发送消息，consumer启动不成功
+ */
 @Configuration
 public class FanoutRabbitConfig {
 
@@ -19,17 +23,17 @@ public class FanoutRabbitConfig {
 
     @Bean
     public Queue queueA() {
-        return new Queue("fanout_queue1");
+        return new Queue("MQ_FANOUTTEST_PROVIDER2CONSUMER_1");
     }
 
     @Bean
     public Queue queueB() {
-        return new Queue("fanout_queue2");
+        return new Queue("MQ_FANOUTTEST_PROVIDER2CONSUMER_2");
     }
 
     @Bean
     public Queue queueC() {
-        return new Queue("fanout_queue3");
+        return new Queue("MQ_FANOUTTEST_PROVIDER2CONSUMER_3");
     }
 
     @Bean
