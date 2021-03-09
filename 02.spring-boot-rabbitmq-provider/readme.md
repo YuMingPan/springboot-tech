@@ -4,4 +4,4 @@
 
 消费者接收消息时不想消息确认的话，直接用@RabbitListener(queues = "队列名")和@RabbitHandler处理返回信息即可
 
-否则的话需要通过实现ChannelAwareMessageListener重写onMessage方法来处理数据，同时可以进行消息确认，并将其注入到配置类当中
+否则的话需要通过实现ChannelAwareMessageListener重写onMessage方法来处理数据，同时可以进行消息确认，并将其注入到配置类当中(监听)
