@@ -1,0 +1,16 @@
+package com.example.springbootrabbitmq.receiver;
+
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Component
+@RabbitListener(queues = "queue1")
+public class TopicManReceiver {
+    @RabbitHandler
+    public void process(Map testMessage) {
+        System.out.println("TopicReceiver消费者收到消息  : " + testMessage.toString());
+    }
+}
