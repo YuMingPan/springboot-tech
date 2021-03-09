@@ -5,3 +5,7 @@
 消费者接收消息时不想消息确认的话，直接用@RabbitListener(queues = "队列名")和@RabbitHandler处理返回信息即可
 
 否则的话需要通过实现ChannelAwareMessageListener(监听器)重写onMessage方法来处理数据，同时可以进行消息确认，并将其注入到配置类当中(监听容器)
+
+※实际上rabbitmq都已经在服务器配置好了，我们只需要监听它并处理即可，掌握基本操作后直接关注SimpleReceive类即可
+
+※要亲自动手尝试！！！
